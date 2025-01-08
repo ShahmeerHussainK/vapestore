@@ -1,0 +1,607 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+{#<link rel="stylesheet" href="{% static 'home/css/home.css' %}">#}
+{% endblock %}
+
+{% block content %}
+
+
+
+    <body class="home">
+<div class="header-device-mobile">
+    <div class="wapper">
+        <div class="item mobile-logo">
+            <div class="logo">
+                <a href="#">
+                    <img src="{% static 'images/Smokes-Hub.jpg' %}" alt="img" style="width: 100px; height: auto;">
+                </a>
+            </div>
+        </div>
+        <div class="item item mobile-search-box has-sub">
+            <a href="#">
+						<span class="icon">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</span>
+            </a>
+            <div class="block-sub">
+                <a href="#" class="close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <div class="header-searchform-box">
+                    <form class="header-searchform">
+                        <div class="searchform-wrap">
+                            <input type="text" class="search-input" placeholder="Enter keywords to search...">
+                            <input type="submit" class="submit button" value="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="item mobile-settings-box has-sub">
+            <a href="#">
+						<span class="icon">
+							<i class="fa fa-cog" aria-hidden="true"></i>
+						</span>
+            </a>
+            <div class="block-sub">
+                <a href="#" class="close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <div class="block-sub-item">
+                    <h5 class="block-item-title">Currency</h5>
+                    <form class="currency-form herald-language">
+                        <ul class="herald-language-wrap">
+                            <li class="active">
+                                <a href="#">
+											<span>
+												English (USD)
+											</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="item menu-bar">
+            <a class=" mobile-navigation  menu-toggle" href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="fullwidth-template">
+        <div class="home-slider fullwidth">
+            <div class="slider-owl owl-slick equal-container nav-center equal-container"
+                 data-slick='{"autoplay":true, "autoplaySpeed":10000, "arrows":true, "dots":true, "infinite":true, "speed":800, "rows":1}'
+                 data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":1}}]'>
+                <div class="slider-item style4">
+                    <div class="slider-inner equal-element">
+                        <div class="container">
+                            <div class="slider-infor">
+                                <h5 class="title-small">
+                                </h5>
+                                <h3 class="title-big">
+                                    <br/>
+                                </h3>
+                                <div class="price">
+                                    <span class="number-price">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item style5">
+                    <div class="slider-inner equal-element">
+                        <div class="container">
+                            <div class="slider-infor">
+                                <h5 class="title-small">
+                                </h5>
+
+                                <h3 class="title-big">
+                                    <br/>
+                                </h3>
+                                <div class="when-code">
+                                    <span class="number-code">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item style6">
+                    <div class="slider-inner equal-element">
+                        <div class="container">
+                            <div class="slider-infor">
+                                <h5 class="title-small">
+                                </h5>
+                                <h3 class="title-big">
+                                    <br/>
+                                </h3>
+                                <div class="price">
+                                    <span class="number-price">
+                                    </span>
+                                </div>
+                                <a href="#" class="button btn-lets-create bgroud-style">Let’s Create</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="herald-iconbox-wrapp rows-space-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 herald-iconbox-wrapp-small">
+                        <div class="herald-iconbox default">
+                            <div class="iconbox-inner">
+                                <div class="icon">
+                                    <span class="fa fa-truck"></span>
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">
+                                        Free Delivery
+                                    </h4>
+                                    <div class="text">
+                                        On order over Rs5000
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 herald-iconbox-wrapp-small">
+                        <div class="herald-iconbox default">
+                            <div class="iconbox-inner">
+                                <div class="icon">
+                                    <span class="fa fa-shield"></span>
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">
+                                        Money Guarantee
+                                    </h4>
+                                    <div class="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 herald-iconbox-wrapp-small last-item">
+                        <div class="herald-iconbox default">
+                            <div class="iconbox-inner">
+                                <div class="icon">
+                                    <span class="fa fa-life-ring"></span>
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">
+                                        Online Support 24/7
+                                    </h4>
+                                    <div class="text">
+                                        We’re Always here!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-video-wrapp rows-space-40 type2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="banner">
+                            <div class="item-banner style9">
+                                <div class="inner">
+                                    <div class="banner-content">
+                                        <h4 class="herald-subtitle"></h4>
+                                        <h3 class="title">Big Sale Up<br/> To 30% Off</h3>
+                                        <div class="code">
+                                            <span class="nummer-code"></span>
+                                        </div>
+                                        <a href="#" class="button btn-shop-now">Shop now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="banner">
+                            <div class="item-banner style9 type1">
+                                <div class="inner">
+                                    <div class="banner-content">
+                                        <h4 class="herald-subtitle">Sale Up to 50% Off</h4>
+                                        <h3 class="title"> New Good On <br/> The Shop</h3>
+                                        <div class="code">
+                                            <span class="nummer-code"></span>
+                                        </div>
+                                        <a href="#" class="button btn-shop-now">Shop now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="herald-product produc-featured rows-space-40">
+            <div class="container">
+                <div class="custommenu-title-blog-wrap">
+                    <h3 class="custommenu-title-blog">
+                        New Arrivals
+                    </h3>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <ul class="row list-products auto-clear equal-container product-grid">
+                    {% for product in products %}
+                    <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
+                        <div class="product-inner equal-element">
+                            <div class="product-top">
+                                <div class="flash">
+                                    <span class="onnew">
+                                        <span class="text">
+                                            new
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="product-thumb">
+                                <div class="thumb-inner">
+                           <a href="{% url 'product_detail' product.id %}" aria-label="Opens the product details page">
+                                        <img src="{{ product.images.first.image.url }}" alt="img">
+                                    </a>
+                                    <div class="thumb-group">
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#">Add to Wishlist</a>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">Quick View</a>
+                                           <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                                           {% csrf_token %}
+                                           <input type="hidden" name="quantity" style ="display: none" class="text-center form-control border border-dark qty-input current-qty-pid-{{ product.id }}" value="1" min="1" max="{{ product.stock_level }}" data-product-id="{{ product.id }}" aria-label="quantity">
+                                           <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                            <div class="loop-form-add-to-cart">
+                                                <button class="single_add_to_cart_button button">Add to cart
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h5 class="product-name product_title">
+                                    <a href="#">{{product.name}}</a>
+                                </h5>
+                                <div class="group-info">
+                                    <div class="stars-rating">
+                                        <div class="star-rating">
+                                            <span class="star-3"></span>
+                                        </div>
+                                        <div class="count-star">
+                                            {{ product.number_of_ratings }}
+                                        </div>
+                                    </div>
+                                    <div class="price">
+                                        <del>
+                                           Rs {{ product.price }}
+                                        </del>
+                                        <ins>
+                                            Rs {{ product.discounted_price }}
+                                        </ins>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+        <div class="banner-pinmap-wrapp rows-space-70">
+            <div class="banner">
+                <div class="item-banner style21">
+                    <div class="inner">
+                        <div class="banner-content container">
+                            <h4 class="herald-subtitle"></h4>
+                            <h3 class="title">
+                                Collection<br/>
+                                Sale <span>15%</span> Off
+                            </h3>
+                            <div class="start-from">
+                            </div>
+                            <a href="#" class="button btn-shop-now">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="herald-product layout1">
+            <div class="container">
+                <div class="container-wapper">
+                    <div class="head">
+                        <h3 class="title">Weekly Featured</h3>
+                        <div class="subtitle">Let’s Shop our featured item this week</div>
+                    </div>
+                    <div class="product-list-owl owl-slick equal-container nav-center-left"
+                         data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":true, "dots":false, "infinite":true, "speed":800,"infinite":false}'
+                         data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":3}},{"breakpoint":"1200","settings":{"slidesToShow":2}},{"breakpoint":"992","settings":{"slidesToShow":1}},{"breakpoint":"768","settings":{"slidesToShow":2}},{"breakpoint":"481","settings":{"slidesToShow":1}}]'>
+                        {% for product in products %}
+                            <div class="product-item style-1 product-type-variable">
+                            <div class="product-inner equal-element">
+                                <div class="product-top">
+                                    <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                    </div>
+                                </div>
+                                <div class="product-thumb">
+                                    <div class="thumb-inner">
+                                        <a href="{% url 'product_detail' product.id %}"></a>
+
+                                            <img src="{{ product.images.first.image.url }}" alt="img">
+                                        </a>
+                                        <div class="thumb-group">
+                                            <div class="yith-wcwl-add-to-wishlist">
+                                                <div class="yith-wcwl-add-button">
+                                                    <a href="#">Add to Wishlist</a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="button quick-wiew-button">Quick View</a>
+                                            <div class="loop-form-add-to-cart">
+                                                <button class="single_add_to_cart_button button">Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-name product_title">
+                                        <a href="{% url 'product_detail' product.id %}">
+                                            {{product.name}}</a>
+                                    </h5>
+                                    <div class="group-info">
+                                        <div class="stars-rating">
+                                            <div class="star-rating">
+                                                <span class="star-3"></span>
+                                            </div>
+                                            <div class="count-star">
+                                                {{ product.number_of_ratings }}
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <del>
+                                                {{ product.price }}
+                                            </del>
+                                            <ins>
+                                                {{ product.discounted_price }}
+                                            </ins>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<footer class="footer style7">
+    <div class="container">
+        <div class="container-wapper">
+            <div class="row">
+                <div class="box-footer col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="herald-custommenu default">
+                        <h2 class="widgettitle">Quick Menu</h2>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <ul class="menu">
+                                    <li class="menu-item">
+                                        <a href="#">New arrivals</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Creamy</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Fruity</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Beverage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <ul class="menu">
+                                    <li class="menu-item">
+                                        <a href="#">Delivery</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Contact Us</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Return</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="store-addresses">
+                        <h2 class="widgettitle">Our Store Locations</h2>
+
+                            <ul .store-addresses {
+                                background-color: #1a1a1a;
+                                color: white;
+                                padding: 20px;
+                                border-radius: 8px;
+                                max-width: 600px;
+                                margin: 20px auto;
+                                font-family: Arial, sans-serif;
+                            }
+
+                            .store-addresses h2 {
+                                text-align: center;
+                                margin-bottom: 10px;
+                                font-size: 24px;
+                                font-weight: bold;
+                                color: #f0a500;
+                            }
+
+                            .address-list {
+                                list-style: none;
+                                padding: 0;
+                            }
+
+                            .address-list li {
+                                margin-bottom: 10px;
+                                font-size: 16px;
+                                line-height: 1.6;
+                            }
+                         class="address-list">
+
+                                <li><strong>Bahria Town Branch:</strong> Plaza 178, Gulmohar Block, Bahria Town, Lahore</li>
+                                <li><strong>Johar Town Branch:</strong> 42 Block A, Khayaban-e-Firdousi, Phase 1, Johar Town, Lahore</li>
+                                <li><strong>DHA Phase 6 Branch:</strong> Ground Floor 102, CCA, DHA Phase 6, Lahore</li>
+                                <li><strong>DHA Phase 5 Branch:</strong> Plaza No 69, Ground Floor, Smokeshub, Sector C, Phase 5, DHA, Lahore, Punjab</li>
+                            </ul>
+                        </div>
+
+                        <ul class="menu">
+                            <li class="menu-item">
+                                Phone: <a href="tel:(+92) 303-0584477"><strong>0312-7899318</strong></a>
+                            </li>
+{#                            <li class="menu-item">#}
+{#                                Fax: <a href="tel:(+123) 456 789 - (+123) 666 888"><strong>(+123) 666 888</strong></a>#}
+{#                            </li>#}
+{#                            <li class="menu-item">#}
+{#                                Email: <a href="mailto:Contact@yourcompany.com"><strong>Contact@yourcompany.com</strong></a>#}
+{#                            </li>#}
+                            <li class="menu-item">
+                                Follow us:
+                                <div class="herald-socials">
+                                    <ul class="socials">
+                                        <li>
+                                            <a href="https://www.facebook.com/share/K8WV8HnBim3yLDAG/" class="social-item" target="https://www.facebook.com/share/K8WV8HnBim3yLDAG/">
+                                                <i class="icon fa fa-facebook-square"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.instagram.com/smokeshubpk/" class="social-item" target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.tiktok.com/@smokeshubpakistan?lang=en" class="social-item" target="_blank">
+                                                <i class="fa-brands fa-tiktok"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 border-custom">
+                    <span></span>
+                </div>
+            </div>
+            <div class="footer-end">
+{#                <div class="row">#}
+{#                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">#}
+{#                        <div class="herald-payment">#}
+{#                            <img src="assets/images/payments.png" alt="img">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">#}
+{#                        <div class="coppyright">#}
+{#                            Copyright © 2020#}
+{#                            <a href="#">Herald</a>#}
+{#                            . All rights reserved#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="footer-device-mobile">
+    <div class="wapper">
+        <div class="footer-device-mobile-item device-home">
+            <a href="index.html">
+					<span class="icon">
+						<i class="fa fa-home" aria-hidden="true"></i>
+					</span>
+                Home
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-wishlist">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-heart" aria-hidden="true"></i>
+					</span>
+                Wishlist
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-cart">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+						<span class="count-icon">
+							0
+						</span>
+					</span>
+                <span class="text">Cart</span>
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-user">
+            <a href="login.html">
+					<span class="icon">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</span>
+                Account
+            </a>
+        </div>
+    </div>
+</div>
+<a href="#" class="backtotop">
+    <i class="fa fa-chevron-up"></i>
+</a>
+<script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/jquery.plugin-countdown.min.js' %}"></script>
+    <script src="{% static 'js/jquery-countdown.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/isotope.min.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/mobile-menu.js' %}"></script>
+    <script src="{% static 'js/chosen.min.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/jquery.elevateZoom.min.js' %}"></script>
+    <script src="{% static 'js/jquery.actual.min.js' %}"></script>
+    <script src="{% static 'js/fancybox/source/jquery.fancybox.js' %}"></script>
+    <script src="{% static 'js/lightbox.min.js' %}"></script>
+    <script src="{% static 'js/owl.thumbs.min.js' %}"></script>
+    <script src="{% static 'js/frontend-plugin.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM"></script>
+</body>
+{% endblock %}

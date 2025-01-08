@@ -1,0 +1,240 @@
+<style>
+/* Basic Styles */
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.containerr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-message {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 350px; /* Adjust this as per your layout */
+}
+
+/* Animation Styles */
+.header-message::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100px;
+}
+
+@keyframes scroll-text {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+.header-message {
+    animation: scroll-text 20s linear infinite;
+}
+</style>
+
+
+<header class="header style2">
+ <div class="top-bar">
+    <div class="containerr">
+        <div class="top-bar-left">
+    <div class="header-message">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
+             alt="WhatsApp"
+             style="width: 24px;">
+        To Order WhatsApp us at 0312-7899318
+    </div>
+</div>
+
+        <div class="top-bar-right">
+            <ul class="header-user-links">
+                <li>
+                    <a href="{% url 'account_login' %}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="container">
+        <div class="main-header" style="!important;padding: 0">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 col-md-4 col-xs-7 col-ts-12 header-element" style="align-content: center">
+                    <div class="block-search-block">
+                        <form class="form-search" method="GET" action="{% url 'products' %}">
+                            <div class="form-content">
+                                <div class="inner">
+                                    <input type="search" class="input" name="q" value="" placeholder="Search">
+                                    <button class="btn-search" type="submit">
+                                        <span class="icon-search"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-md-4 col-xs-5 col-ts-12">
+                    <div class="logo">
+                        <a href="{% url 'home' %}">
+                            <img src="/static/images/Smokes-Hub.jpg" alt="logo"> {# <img src="{% static 'images/logo.png' %}" alt="img">#}
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4 col-xs-12 col-ts-12" style="align-content: center">
+                    <div class="header-control">
+                        <div class="block-minicart herald-mini-cart block-header">
+                            <a href="{% url 'view_cart' %}" class="shopcart-icon" data-herald="herald-dropdown">
+                                Cart
+                                <span class="count">
+								    {{product_count}}
+                                </span>
+                                </a>
+                        </div>
+                        <a class="menu-bar mobile-navigation menu-toggle" href="#">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-nav-container">
+        <div class="container">
+            <div class="header-nav-wapper main-menu-wapper">
+                <div class="header-nav">
+                    <div class="container-wapper" style="width: 120rem; ">
+                        <ul class="herald-clone-mobile-menu herald-nav main-menu " id="menu-main-menu">
+                            <li class="menu-item ">
+                                <a href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+
+                            </li>
+                            <li class="menu-item  menu-item-has-children">
+                                <a href="{% url 'products' %}?subcategory=e-liquids" class="herald-menu-item-title" title="E-LIQUIDS">E-LIQUIDS</a>
+                                <span class="toggle-submenu"></span>
+                                <ul class="submenu">
+                                    <li class="menu-item">
+                                        <a href="{% url 'flavors_by_brand' %}?brand=TOKYO">TOKYO Nic Salt</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'flavors_by_brand' %}?brand=RUFPUF">RUFPUF Nic Salt</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'flavors_by_brand' %}?brand=SLUGGER">SLUGGER Nic Salt</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'flavors_by_brand' %}?brand=VGOD">VGOD Nic Salt</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'flavors_by_brand' %}?brand=INFINITY">INFINITY Nic Salt</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'flavors_by_brand' %}?brand=DRIP DOWN">DRIP DOWN Nic Salt</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item  menu-item-has-children">
+                                <a href="{% url 'products' %}?subcategory=pods" class="herald-menu-item-title" title="Pod-Devices">Pod Devices</a>
+                                <span class="toggle-submenu"></span>
+                                <ul class="submenu">
+                                    <li class="menu-item">
+                                        <a href="{% url 'pods_by_brand' %}?brand=VAPORESSO">VAPORESSO</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'pods_by_brand' %}?brand=VOOPOO">VOOPOO</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'pods_by_brand' %}?brand=OXVA">OXVA</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'pods_by_brand' %}?brand=GEEK VAPE">GEEK VAPE</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'pods_by_brand' %}?brand=SMOK">SMOK</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'pods_by_brand' %}?brand=UWELL">UWELL</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="{% url 'products' %}?subcategory=mod" class="herald-menu-item-title" title="Mod-Kits">Mod Kits</a>
+                            </li>
+                            <li class="menu-item  menu-item-has-children">
+                                <a href="{% url 'products' %}?subcategory=disposable" class="herald-menu-item-title" title="Disposable-pods">DISPOSABLES</a>
+                                <span class="toggle-submenu"></span>
+                                <ul class="submenu">
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=ELF BAR">ELFBAR</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=SLUGGER">SLUGGER</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=OXVA">OXBAR</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=RUFPUF">RUFPUF</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=ZOVOO">Zovoo Dragbar Disposables</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=INFINITY">Infinity Bar Disposables</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=ivg">IVG Disposables</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=7 Daze">7 Daze Disposables</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=FLIPPER BY SLUGGER DISPOSABLES">Flipper by Slugger Disposables</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=SMOK">Smok Priv Bar Disposable</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=MNKE BARS">MNKE Bars Disposable</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=AIR BAR">Airbar Disposables</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="{% url 'disposable_vapes_by_brand' %}?brand=BLVK">BLVK Disposables</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="{% url 'products' %}?subcategory=tank" class="herald-menu-item-title" title="TANKS">TANKS</a>
+
+                            </li>
+                            <li class="menu-item ">
+                                <a href="{% url 'products' %}?subcategory=coil" } class="herald-menu-item-title" title="COILS">COILS PODS</a>
+
+                            </li>
+
+                            <li class="menu-item  ">
+                                <a href="{% url 'products' %}?subcategory=battery,accessory" } class="herald-menu-item-title" title="Accessory">Accessories</a>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+

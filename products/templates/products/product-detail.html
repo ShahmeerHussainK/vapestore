@@ -1,0 +1,837 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/review-accordion.css' %}">
+{% endblock %}
+
+{% block head_title %}- {{product.name}}{% endblock %}
+
+{% block content %}
+
+{#<main class="mx-auto p-0 container">#}
+{##}
+{#    <!-- Trail to help the user navigate backwards -->#}
+{#    {% include "./includes/components/product-breadcrumb.html" %}#}
+{##}
+{#    <div class="row no-gutters mb-3">#}
+{##}
+{#        <div#}
+{#            class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">#}
+{##}
+{#            <div class="bg-black text-light">#}
+{##}
+{#                <h1 class="text-center d-md-none pt-5">{{ product.name }}</h1>#}
+{#                <p#}
+{#                    class="small text-right d-md-none text-muted mt-2 mb-0 pb-3 pr-3"><i#}
+{#                        class="fas fa-tag mr-1"></i> {{product.sub_category.friendly_name }}</p>#}
+{##}
+{#            </div>#}
+{##}
+{#            <!-- diplays image or paceholder -->#}
+{#            {% if product.image %}#}
+{##}
+{#            <a href="{{ product.images.first.image.url }}" target="_blank"#}
+{#                aria-label="opens product image in a new tab">#}
+{#                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}"#}
+{#                    class="img-fluid">#}
+{#            </a>#}
+{##}
+{#            {% else %}#}
+{##}
+{#            <a href="#">#}
+{#                <img src="{{ MEDIA_URL }}noimage.png"#}
+{#                    alt="No image available for {{ product.name }}"#}
+{#                    class="img-fluid">#}
+{#            </a>#}
+{##}
+{#            {% endif %}#}
+{#        </div>#}
+{##}
+{#        <div class="col-12 col-md-6">#}
+{##}
+{#            <!-- display product information excluding description -->#}
+{#            <div class="bg-black text-light">#}
+{##}
+{#                <h2#}
+{#                    class="text-center d-none d-md-block pt-5 bg-black text-light">{{product.name }}</h2>#}
+{#                <p#}
+{#                    class="small text-right d-none d-md-block text-mutedtext-capitalize mt-2 pb-3 pr-3"><i#}
+{#                        class="fas fa-tag mr-1"></i> {{product.sub_category.friendly_name }}</p>#}
+{##}
+{#            </div>#}
+{##}
+{#            <p#}
+{#                class="text-center mt-5 {% if product.current_rating == 0 %}mb-2{% else %}mb-3{% endif %}">#}
+{#                Customer Rating = <i#}
+{#                    class="fa-solid fa-star text-warning"></i>{% if product.current_rating == 0 %} 0 / 5 </p><p#}
+{#                class="text-center mt-0">Be the first to rate this product {%else %} {{ product.current_rating }} / 5{% endif %}</p>#}
+{##}
+{#            <div#}
+{#                class="bg-black text-light text-center p-3 font-weight-bold mt-5">#}
+{#                <!-- Product price and if relevant sale price to show saving -->#}
+{#                {% if product.has_sale %}#}
+{##}
+{#                <p class="text-center font-weight-bold mb-0 pl-5 ml-5">#}
+{#                    <s class="text-danger">RS ;{{ product.rrp }}</s>#}
+{#                </p>#}
+{##}
+{#                {% endif %}#}
+{##}
+{#                <p class="text-center font-weight-bold">RS {{ product.price}}</p>#}
+{#            </div>#}
+{##}
+{#            <p class="small text-center text-muted mb-5">sku: {{ product.sku}}</p>#}
+{##}
+{#            <form class="mt-5" action="{% url 'add_to_cart' product.id %}"#}
+{#                method="POST">#}
+{##}
+{#                {% csrf_token %}#}
+{##}
+{#                <div>#}
+{#                    <div>#}
+{##}
+{#                        <p#}
+{#                            class="mx-auto font-weight-bold text-center pb-0 mb-0">Select#}
+{#                            Quantity:</p>#}
+{##}
+{#                        <!-- Qty slector buttons -->#}
+{#                        <div class="form-group d-flex justify-content-center">#}
+{##}
+{#                            <div#}
+{#                                class="input-group w-50 input-group-{{ product.id }}">#}
+{##}
+{#                                <div class="input-group-prepend">#}
+{##}
+{#                                    <button#}
+{#                                        class="btn btn-danger rounded-left border border-dark decrease-qty decrease-qty-{{ product.id }}"#}
+{#                                        data-product-id="{{ product.id}}"#}
+{#                                        aria-label="decrease quantity">#}
+{#                                        <span>#}
+{#                                            <i class="fas fa-minus fa-lg"></i>#}
+{#                                        </span>#}
+{#                                    </button>#}
+{##}
+{#                                </div>#}
+{##}
+{#                                <input type="number" name="quantity"#}
+{#                                    aria-label="enter required quantity"#}
+{#                                    class=" text-center form-control border border-dark qty-input current-qty-pid-{{ product.id }}"#}
+{#                                    value="1" min="1"#}
+{#                                    max="{{ product.stock_level }}"#}
+{#                                    data-product-id="{{ product.id }}">#}
+{##}
+{#                                <div class="input-group-append">#}
+{##}
+{#                                    <button#}
+{#                                        class="btn btn-success rounded-right border border-dark increase-qty increase-qty-{{ product.id }}"#}
+{#                                        data-product-id="{{ product.id}}"#}
+{#                                        aria-label="increase quantity">#}
+{#                                        <span>#}
+{#                                            <i class="fas fa-plus fa-lg"></i>#}
+{#                                        </span>#}
+{#                                    </button>#}
+{##}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <p class="text-center m-1">#}
+{##}
+{#                            <!-- stock level indication -->#}
+{#                            {% if product.in_stock %}#}
+{##}
+{#                            <i#}
+{#                                class="fa-regular fa-square-check fa-sm text-success"></i>#}
+{#                            {{product.stock_level}} in stock#}
+{##}
+{#                            {% else %}#}
+{##}
+{#                            <i#}
+{#                                class="fa-regular fa-rectangle-xmark fa-sm text-danger"></i>#}
+{#                            Out of Stock#}
+{##}
+{#                            {% endif %}#}
+{#                        </p>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    <!-- Allows staff to edit and delete items -->#}
+{#                    {% if user.is_superuser %}#}
+{##}
+{#                    <div class="text-right">#}
+{##}
+{#                        <a class="m-3 btn btn-link text-blue"#}
+{#                            href="{% url 'edit_product' product.id %}"#}
+{#                            aria-label="edit product">Edit</a> |#}
+{#                        <a class="btn btn-link text-danger m-3"#}
+{#                            href="{% url 'delete_product' product.id %}"#}
+{#                            aria-label="delete product">Delete</a>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    {% endif %}#}
+{##}
+{#                    <div class="d-flex justify-content-sm-around bg-black p-5">#}
+{##}
+{#                        <a href="{% url 'products' %}"#}
+{#                            class="btn btn-outline-danger p-3">#}
+{##}
+{#                            <span>#}
+{#                                <i class="fas fa-chevron-left fa-sm"></i>#}
+{#                            </span>#}
+{#                            <span class="text-uppercase">All Products</span>#}
+{##}
+{#                        </a>#}
+{##}
+{#                        <button#}
+{#                            class="btn btn-outline-success font-weight-bold py-3 px-5"#}
+{#                            type="submit" {% if not product.in_stock %}disabled{% endif %}>#}
+{#                            Add <i class="fa-solid fa-cart-shopping fa-sm"></i>#}
+{#                        </button>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    <input type="hidden" name="redirect_url"#}
+{#                        value="{{ request.path }}">#}
+{##}
+{#                </div>#}
+{#            </form>#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <hr>#}
+{##}
+{#    <!-- displays product description and reviews in seperate tabs -->#}
+{#    <div class="row mx-auto no-gutters">#}
+{##}
+{#        <div class="col">#}
+{##}
+{#            <nav>#}
+{#                <div#}
+{#                    class="nav nav-pills d-flex justify-content-center bg-black border border-dark"#}
+{#                    id="nav-tab" role="tablist">#}
+{##}
+{#                    <button class="nav-link active btn-danger rounded-0"#}
+{#                        id="nav-Product-decription-tab" data-toggle="tab"#}
+{#                        data-target="#nav-Product-decription" type="button"#}
+{#                        role="tab" aria-controls="nav-Product-decription"#}
+{#                        aria-selected="true">Products Description</button>#}
+{#                    <button class="nav-link btn-danger rounded-0"#}
+{#                        id="nav-reviews-tab" data-toggle="tab"#}
+{#                        data-target="#nav-reviews" type="button" role="tab"#}
+{#                        aria-controls="nav-reviews"#}
+{#                        aria-selected="false">Customer Reviews</button>#}
+{##}
+{#                </div>#}
+{#            </nav>#}
+{##}
+{#            <div class="tab-content border border-dark mb-3 p-2"#}
+{#                id="nav-tabContent">#}
+{##}
+{#                <div class="tab-pane fade show active p-3"#}
+{#                    id="nav-Product-decription" role="tabpanel"#}
+{#                    aria-labelledby="nav-Product-decription-tab">#}
+{#                    {{ product.description|safe }}#}
+{#                </div>#}
+{##}
+{#                <!-- reviews with various user states handled and inline form when first review of a product -->#}
+{#                <div class="tab-pane fade" id="nav-reviews" role="tabpanel"#}
+{#                    aria-labelledby="nav-reviews-tab">#}
+{##}
+{#                    {% if reviews %}#}
+{##}
+{#                    {% if user.is_authenticated %}#}
+{##}
+{#                    <p class="text-center"><a#}
+{#                            class="btn btn-lg btn-warning border border-dark px-5 ml-3 mt-3"#}
+{#                            href="{% url 'add_review' product.id %}"#}
+{#                            aria-label="leave a review">Leave your own#}
+{#                            review</a></p>#}
+{##}
+{#                    {% else %}#}
+{##}
+{#                    <p class="text-center font-weight-bold">Sign in to review#}
+{#                        this product</p>#}
+{##}
+{#                    <div class="text-center">#}
+{##}
+{#                        <a class="btn btn-lg btn-outline-dark mt-3"#}
+{#                            href="{% url 'account_signup' %}"#}
+{#                            aria-label="create and account">Create an#}
+{#                            account</a> or#}
+{#                        <a#}
+{#                            class="btn btn-lg btn-warning border border-dark px-5 ml-3 mt-3"#}
+{#                            href="{% url 'account_login' %}"#}
+{#                            aria-label="login">login</a>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    {% endif %}#}
+{##}
+{#                    {% include './includes/components/review-accordion.html'%}#}
+{##}
+{#                    {% else %}#}
+{##}
+{#                    {% if user.is_authenticated %}#}
+{##}
+{#                    <p class="text-center font-weight-bold">Be the first to#}
+{#                        review this product</p>#}
+{##}
+{#                    {% include './includes/components/inline-review-form.html'%}#}
+{#                    %}#}
+{##}
+{#                    {% else %}#}
+{##}
+{#                    <p class="text-center font-weight-bold">Sign in and be the first to review this product</p>#}
+{##}
+{#                    <div class="text-center">#}
+{##}
+{#                        <a class="btn btn-lg btn-outline-dark mt-3"#}
+{#                            href="{% url 'account_signup' %}">Create an#}
+{#                            account</a> or#}
+{#                        <a#}
+{#                            class="btn btn-lg btn-warning border border-dark px-5 ml-3 mt-3"#}
+{#                            href="{% url 'account_login' %}">login</a>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    {% endif %}#}
+{##}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</main>#}
+ <body class="details-page">
+
+<div class="header-device-mobile">
+    <div class="wapper">
+        <div class="item mobile-logo">
+            <div class="logo">
+                <a href="#">
+                    <img src="assets/images/logo.png" alt="img">
+                </a>
+            </div>
+        </div>
+        <div class="item item mobile-search-box has-sub">
+            <a href="#">
+						<span class="icon">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</span>
+            </a>
+            <div class="block-sub">
+                <a href="#" class="close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <div class="header-searchform-box">
+                    <form class="header-searchform">
+                        <div class="searchform-wrap">
+                            <input type="text" class="search-input" placeholder="Enter keywords to search...">
+                            <input type="submit" class="submit button" value="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="item mobile-settings-box has-sub">
+            <a href="#">
+						<span class="icon">
+							<i class="fa fa-cog" aria-hidden="true"></i>
+						</span>
+            </a>
+            <div class="block-sub">
+                <a href="#" class="close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <div class="block-sub-item">
+                    <h5 class="block-item-title">Currency</h5>
+                    <form class="currency-form herald-language">
+                        <ul class="herald-language-wrap">
+                            <li class="active">
+                                <a href="#">
+											<span>
+												English (USD)
+											</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="item menu-bar">
+            <a class=" mobile-navigation  menu-toggle" href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="main-content main-content-details single no-sidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-trail breadcrumbs">
+                    <ul class="trail-items breadcrumb">
+                        <li class="trail-item trail-begin">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="trail-item">
+                            <a href="#">Creamy</a>
+                        </li>
+                        <li class="trail-item trail-end active">
+                            {{ product.name }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                <div class="site-main">
+                    <div class="details-product">
+                        <div class="details-thumd">
+                            <div class="image-preview-container image-thick-box image_preview_container">
+                                <img id="img_zoom" data-zoom-image="{{ product.images.first.image.url }}"
+                                     src="{{ product.images.first.image.url }}" alt="img">
+                                <a href="{{ product.images.first.image.url }}" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a>
+                            </div>
+
+                            <div class="product-preview image-small product_preview">
+                                <div id="thumbnails" class="thumbnails_carousel owl-carousel" data-nav="true"
+                                     data-autoplay="false" data-dots="false" data-loop="false" data-margin="10"
+                                     data-responsive='{"0":{"items":3},"480":{"items":3},"600":{"items":3},"1000":{"items":3}}'>
+                                     {% for image in product.images.all %}
+                                    <a href="#" data-image="{{ image.image.url }}"
+                                       data-zoom-image="{{ image.image.url }}" class="active">
+                                        <img src="{{ image.image.url }}"
+                                             data-large-image="{{ image.image.url }}" alt="img">
+                                    </a>
+                                      {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="details-infor">
+                            <h1 class="product-title">
+                                {{ product.name}}
+                            </h1>
+                            <div class="stars-rating">
+                                <div class="star-rating">
+                                    <span class="star-5"></span>
+                                </div>
+                                <div class="count-star">
+                                    {{ product.number_of_ratings }}
+                                </div>
+                            </div>
+                            {% if product.stock_level > 0 %}
+                            <div class="availability">
+                                availability:
+                                <a href="#">in Stock</a>
+                            </div>
+                                {% else %}
+                                <div class="availability">
+                                availability:
+                                <a href="#">Out of Stock</a>
+                            </div>
+
+                            {% endif %}
+                            <div class="price">
+                                <span>Rs {{ product.discounted_price }}</span>
+                            </div>
+                            <div class="product-details-description">
+                                <ul>
+                                    <li>{{ product.category }}</li>
+                                    <li>{{ product.sub_category }}</li>
+                                    <li>{{ product.brand }}</li>
+                                </ul>
+                            </div>
+
+                            <div class="group-button">
+                                <div class="yith-wcwl-add-to-wishlist">
+                                    <div class="yith-wcwl-add-button">
+                                        <a href="#">Add to Wishlist</a>
+                                    </div>
+                                </div>
+
+
+                                <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                                           {% csrf_token %}
+                                           <input type="hidden" name="quantity" style ="display: none" class="text-center form-control border border-dark qty-input current-qty-pid-{{ product.id }}" value="1" min="1" max="{{ product.stock_level }}" data-product-id="{{ product.id }}" aria-label="quantity">
+                                           <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                            <div class="quantity-add-to-cart">
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+
+                                    </form>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-details-product">
+                        <ul class="tab-link">
+                            <li class="active">
+                                <a data-toggle="tab" aria-expanded="true" href="#product-descriptions">Descriptions </a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" aria-expanded="true" href="#information">Information </a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" aria-expanded="true" href="#reviews">Reviews</a>
+                            </li>
+                        </ul>
+                        <div class="tab-container">
+                            <div id="product-descriptions" class="tab-panel active">
+                                <p>
+                                   {{ product.description|safe }}
+                                </p>
+                            </div>
+                            <div id="information" class="tab-panel">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td>Brand</td>
+                                        <td> {{ product.brand }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category</td>
+                                        <td>{{ product.category }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub Category</td>
+                                        <td>{{ product.sub_category }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="reviews" class="tab-panel">
+                                <div class="reviews-tab">
+                                    <div class="comments">
+
+                                        <ol class="commentlist">
+                                            {% for review in reviews %}
+
+                                            <li class="conment">
+                                                <div class="conment-container">
+
+                                                    <div class="comment-text">
+
+                                                        <p class="meta">
+                                                            <strong class="author">{{ review.title }}</strong>
+                                                            <span>-</span>
+                                                            <span class="time">{{ review.date }}</span>
+                                                        </p>
+                                                        <div class="description">
+                                                            <p>{{ review.content|safe }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ol>
+                                    </div>
+                                    <div class="review_form_wrapper">
+                                        <div class="review_form">
+                                            <div class="comment-respond">
+                                                <span class="comment-reply-title">Add a review </span>
+                                                <form class="comment-form-review">
+                                                    <p class="comment-notes">
+                                                        <span class="email-notes">Your email address will not be published.</span>
+                                                        Required fields are marked
+                                                        <span class="required">*</span>
+                                                    </p>
+                                                    <div class="comment-form-rating">
+                                                        <label>Your rating</label>
+                                                        <p class="stars">
+                                        						<span>
+                                        							<a class="star-1" href="#"></a>
+                                        							<a class="star-2" href="#"></a>
+                                        							<a class="star-3" href="#"></a>
+                                        							<a class="star-4" href="#"></a>
+                                        							<a class="star-5" href="#"></a>
+                                        						</span>
+                                                        </p>
+                                                    </div>
+                                                    <p class="comment-form-comment">
+                                                        <label>
+                                                            Your review
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <textarea title="review" id="comment" name="comment" cols="45"
+                                                                  rows="8"></textarea>
+                                                    </p>
+                                                    <p class="comment-form-author">
+                                                        <label>
+                                                            Name
+                                                            <span class="">*</span>
+                                                        </label>
+                                                        <input title="author" id="author" name="author" type="text"
+                                                               value="">
+                                                    </p>
+                                                    <p class="comment-form-email">
+                                                        <label>
+                                                            Email
+                                                            <span class="">*</span>
+                                                        </label>
+                                                        <input title="email" id="email" name="email" type="email"
+                                                               value="">
+                                                    </p>
+                                                    <p class="form-submit">
+                                                        <input name="submit" type="submit" id="submit" class="submit"
+                                                               value="Submit">
+                                                    </p>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: left;"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer style7">
+    <div class="container">
+        <div class="container-wapper">
+            <div class="row">
+                <div class="box-footer col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="herald-custommenu default">
+                        <h2 class="widgettitle">Quick Menu</h2>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <ul class="menu">
+                                    <li class="menu-item">
+                                        <a href="#">New arrivals</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Life style</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Creamy</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Fruity</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Beverage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <ul class="menu">
+                                    <li class="menu-item">
+                                        <a href="#">FAQs</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Track Order</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Delivery</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Contact Us</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Return</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="store-addresses">
+                        <h2 class="widgettitle">Our Store Locations</h2>
+
+                            <ul .store-addresses {
+                                background-color: #1a1a1a;
+                                color: white;
+                                padding: 20px;
+                                border-radius: 8px;
+                                max-width: 600px;
+                                margin: 20px auto;
+                                font-family: Arial, sans-serif;
+                            }
+
+                            .store-addresses h2 {
+                                text-align: center;
+                                margin-bottom: 10px;
+                                font-size: 24px;
+                                font-weight: bold;
+                                color: #f0a500;
+                            }
+
+                            .address-list {
+                                list-style: none;
+                                padding: 0;
+                            }
+
+                            .address-list li {
+                                margin-bottom: 10px;
+                                font-size: 16px;
+                                line-height: 1.6;
+                            }
+                         class="address-list">
+
+                                <li><strong>Bahria Town Branch:</strong> Plaza 178, Gulmohar Block, Bahria Town, Lahore</li>
+                                <li><strong>Johar Town Branch:</strong> 42 Block A, Khayaban-e-Firdousi, Phase 1, Johar Town, Lahore</li>
+                                <li><strong>DHA Phase 6 Branch:</strong> Ground Floor 102, CCA, DHA Phase 6, Lahore</li>
+                                <li><strong>DHA Phase 5 Branch:</strong> Plaza No 69, Ground Floor, Smokeshub, Sector C, Phase 5, DHA, Lahore, Punjab</li>
+                            </ul>
+                        </div>
+
+                        <ul class="menu">
+                            <li class="menu-item">
+                                Phone: <a href="tel:(+92) 303-0584477"><strong>0312-7899318</strong></a>
+                            </li>
+{#                            <li class="menu-item">#}
+{#                                Fax: <a href="tel:(+123) 456 789 - (+123) 666 888"><strong>(+123) 666 888</strong></a>#}
+{#                            </li>#}
+{#                            <li class="menu-item">#}
+{#                                Email: <a href="mailto:Contact@yourcompany.com"><strong>Contact@yourcompany.com</strong></a>#}
+{#                            </li>#}
+                             <li class="menu-item">
+                                Follow us:
+                                <div class="herald-socials">
+                                    <ul class="socials">
+                                        <li>
+                                            <a href="https://www.facebook.com/share/K8WV8HnBim3yLDAG/" class="social-item" target="https://www.facebook.com/share/K8WV8HnBim3yLDAG/">
+                                                <i class="icon fa fa-facebook-square"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.instagram.com/smokeshubpk/" class="social-item" target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.tiktok.com/@smokeshubpakistan?lang=en" class="social-item" target="_blank">
+                                                <i class="fa-brands fa-tiktok"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-footer col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="herald-newsletter style1">
+                        <div class="newsletter-head">
+                            <h3 class="title">Newsletter</h3>
+                        </div>
+                        <div class="newsletter-form-wrap">
+                            <div class="list">
+                                Join up to get the latest on sales, new arrivals and more...
+                            </div>
+                            <input type="email" class="input-text email email-newsletter"
+                                   placeholder="Your email letter">
+                            <button class="button btn-submit submit-newsletter">SUBSCRIBE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 border-custom">
+                    <span></span>
+                </div>
+            </div>
+            <div class="footer-end">
+{#                <div class="row">#}
+{#                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">#}
+{#                        <div class="herald-payment">#}
+{#                            <img src="assets/images/payments.png" alt="img">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">#}
+{#                        <div class="coppyright">#}
+{#                            Copyright © 2020#}
+{#                            <a href="#">Herald</a>#}
+{#                            . All rights reserved#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="footer-device-mobile">
+    <div class="wapper">
+        <div class="footer-device-mobile-item device-home">
+            <a href="index.html">
+					<span class="icon">
+						<i class="fa fa-home" aria-hidden="true"></i>
+					</span>
+                Home
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-wishlist">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-heart" aria-hidden="true"></i>
+					</span>
+                Wishlist
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-cart">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+						<span class="count-icon">
+							0
+						</span>
+					</span>
+                <span class="text">Cart</span>
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-user">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</span>
+                Account
+            </a>
+        </div>
+    </div>
+</div>
+<a href="#" class="backtotop">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/jquery.plugin-countdown.min.js' %}"></script>
+    <script src="{% static 'js/jquery-countdown.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/isotope.min.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/mobile-menu.js' %}"></script>
+    <script src="{% static 'js/chosen.min.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/jquery.elevateZoom.min.js' %}"></script>
+    <script src="{% static 'js/jquery.actual.min.js' %}"></script>
+    <script src="{% static 'js/fancybox/source/jquery.fancybox.js' %}"></script>
+    <script src="{% static 'js/lightbox.min.js' %}"></script>
+    <script src="{% static 'js/owl.thumbs.min.js' %}"></script>
+    <script src="{% static 'js/frontend-plugin.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM"></script>
+</body>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'products/js/qtySelectorBtns.js' %}"></script>
+{% endblock %}

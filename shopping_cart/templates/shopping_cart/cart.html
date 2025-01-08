@@ -1,0 +1,474 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}- Shopping Cart{% endblock %}
+
+{% load cart_subtotal_tool %}
+
+{% block content %}
+{#<main class="container my-3">#}
+{#    #}
+{#    <div class="row">#}
+{#    #}
+{#        <div class="col">#}
+{#    #}
+{#            <h1 class="text-left py-3 border-bottom text-uppercase text-center">Current Cart Items</h1>#}
+{#            #}
+{#            {% if cart_contents %}#}
+{#            #}
+{#                <p class="text-center">#}
+{#                    <small>Please review your cart before proceeding to the #}
+{##}
+{#                        <a href="#checkout-access" aria-label="Skip to cart reviewbe taken down the page to click pay now button">#}
+{#                            checkout page#}
+{#                        </a>#}
+{##}
+{#                    </small>#}
+{#                </p>#}
+{##}
+{#            {% endif %}#}
+{##}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{##}
+{#        <div class="col">#}
+{##}
+{#            {% if cart_contents %}#}
+{##}
+{#                {% include './includes/components/cart-items-table.html' %}#}
+{##}
+{#            {% else %}#}
+{##}
+{#                <p class="lead mb-5">Your current cart is empty.</p>#}
+{#                <div class="text-center">#}
+{#                    <a href="{% url 'products' %}" class="btn btn-outline-dark rounded-0 btn-lg">#}
+{#                        #}
+{#                        <span class="icon">#}
+{#                            <i class="fas fa-chevron-left fa-sm"></i>#}
+{#                        </span>#}
+{##}
+{#                        <span class="text-uppercase">keep shopping</span>#}
+{##}
+{#                    </a>#}
+{#                </div>#}
+{##}
+{#            {% endif %}#}
+{##}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#    #}
+{#</main>#}
+<body class="inblog-page">
+<div class="header-device-mobile">
+    <div class="wapper">
+        <div class="item mobile-logo">
+            <div class="logo">
+                <a href="#">
+                    <img src="assets/images/logo.png" alt="img">
+                </a>
+            </div>
+        </div>
+        <div class="item item mobile-search-box has-sub">
+            <a href="#">
+						<span class="icon">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</span>
+            </a>
+            <div class="block-sub">
+                <a href="#" class="close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <div class="header-searchform-box">
+                    <form class="header-searchform">
+                        <div class="searchform-wrap">
+                            <input type="text" class="search-input" placeholder="Enter keywords to search...">
+                            <input type="submit" class="submit button" value="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="item mobile-settings-box has-sub">
+            <a href="#">
+						<span class="icon">
+							<i class="fa fa-cog" aria-hidden="true"></i>
+						</span>
+            </a>
+            <div class="block-sub">
+                <a href="#" class="close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <div class="block-sub-item">
+                    <h5 class="block-item-title">Currency</h5>
+                    <form class="currency-form herald-language">
+                        <ul class="herald-language-wrap">
+                            <li class="active">
+                                <a href="#">
+											<span>
+												English (USD)
+											</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+											<span>
+												French (EUR)
+											</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+											<span>
+												Japanese (JPY)
+											</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="item menu-bar">
+            <a class=" mobile-navigation  menu-toggle" href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="site-content">
+    <main class="site-main  main-container no-sidebar">
+        <div class="container">
+            <div class="breadcrumb-trail breadcrumbs">
+                <ul class="trail-items breadcrumb">
+                    <li class="trail-item trail-begin">
+                        <a href="">
+								<span>
+									Home
+								</span>
+                        </a>
+                    </li>
+                    <li class="trail-item trail-end active">
+							<span>
+								Shopping Cart
+							</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="main-content-cart main-content col-sm-12">
+                    <h3 class="custom_blog_title">
+                        Shopping Cart
+                    </h3>
+                    <div class="page-main-content">
+                        <div class="shoppingcart-content">
+                            <form action="shoppingcart.html" class="cart-form">
+                                <table class="shop_table">
+                                    <thead>
+                                    <tr>
+                                        <th class="product-remove"></th>
+                                        <th class="product-thumbnail"></th>
+                                        <th class="product-name"></th>
+                                        <th class="product-price"></th>
+                                        <th class="product-quantity"></th>
+                                        <th class="product-subtotal"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in cart_contents %}
+                                            <form action="{% url 'edit_cart' item.product.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <tr class="cart_item">
+                                        <td class="product-remove">
+                                            <a href="#" class="remove"></a>
+                                        </td>
+                                        <td class="product-thumbnail">
+                                            <a href="{% url 'product_detail' item.product.id %}">
+                                                <img src="{{ item.product.images.first.image.url }}" alt="img"
+                                                     class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
+                                            </a>
+                                        </td>
+                                        <td class="product-name" data-title="Product">
+                                            <a href="{% url 'product_detail' item.product.id %}" class="title">{{ item.product.name }}</a>
+                                            <span class="attributes-select attributes-color">{{ item.product.brand }}</span>
+                                            <span class="attributes-select attributes-size">{{ item.product.category }}</span>
+                                        </td>
+                                        <td class="product-quantity" data-title="Quantity">
+                                            <div class="quantity">
+                                                <div class="control">
+                                                    <a class="btn-number qtyminus quantity-minus" data-product-id="{{ item.product.id}}" href="#">-</a>
+                                                    <input type="text" data-step="1" data-min="0" value={{ item.quantity }} title="Qty"
+                                                           class="input-qty qty" size="4">
+                                                    <a href="{% url 'product_detail' item.product.id %}" class="btn-number qtyplus quantity-plus">+</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-price" data-title="Price">
+													<span class="woocommerce-Price-amount amount">
+														<span class="woocommerce-Price-currencySymbol">
+															RS
+														</span>
+														{{ item.product.discounted_price }}
+													</span>
+                                        </td>
+                                    </tr>
+                                            </form>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </form>
+                            <div class="control-cart">
+                                <button class="button btn-continue-shopping">
+                                     <a href="{% url 'home' %}">Continue Shopping</a>
+                                </button>
+                                <button class="button btn-cart-to-checkout">
+                                     <a href="{% url 'contact_us' %}">Checkout</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<footer class="footer style7">
+    <div class="container">
+        <div class="container-wapper">
+            <div class="row">
+                <div class="box-footer col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="herald-custommenu default">
+                        <h2 class="widgettitle">Quick Menu</h2>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <ul class="menu">
+                                    <li class="menu-item">
+                                        <a href="#">New arrivals</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Life style</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Creamy</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Fruity</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Beverage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <ul class="menu">
+                                    <li class="menu-item">
+                                        <a href="#">FAQs</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Track Order</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Delivery</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Contact Us</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#">Return</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="store-addresses">
+                        <h2 class="widgettitle">Our Store Locations</h2>
+
+                            <ul .store-addresses {
+                                background-color: #1a1a1a;
+                                color: white;
+                                padding: 20px;
+                                border-radius: 8px;
+                                max-width: 600px;
+                                margin: 20px auto;
+                                font-family: Arial, sans-serif;
+                            }
+
+                            .store-addresses h2 {
+                                text-align: center;
+                                margin-bottom: 10px;
+                                font-size: 24px;
+                                font-weight: bold;
+                                color: #f0a500;
+                            }
+
+                            .address-list {
+                                list-style: none;
+                                padding: 0;
+                            }
+
+                            .address-list li {
+                                margin-bottom: 10px;
+                                font-size: 16px;
+                                line-height: 1.6;
+                            }
+                         class="address-list">
+
+                                <li><strong>Bahria Town Branch:</strong> Plaza 178, Gulmohar Block, Bahria Town, Lahore</li>
+                                <li><strong>Johar Town Branch:</strong> 42 Block A, Khayaban-e-Firdousi, Phase 1, Johar Town, Lahore</li>
+                                <li><strong>DHA Phase 6 Branch:</strong> Ground Floor 102, CCA, DHA Phase 6, Lahore</li>
+                                <li><strong>DHA Phase 5 Branch:</strong> Plaza No 69, Ground Floor, Smokeshub, Sector C, Phase 5, DHA, Lahore, Punjab</li>
+                            </ul>
+                        </div>
+
+                        <ul class="menu">
+                            <li class="menu-item">
+                                Phone: <a href="tel:(+92) 303-0584477"><strong>0312-7899318</strong></a>
+                            </li>
+{#                            <li class="menu-item">#}
+{#                                Fax: <a href="tel:(+123) 456 789 - (+123) 666 888"><strong>(+123) 666 888</strong></a>#}
+{#                            </li>#}
+{#                            <li class="menu-item">#}
+{#                                Email: <a href="mailto:Contact@yourcompany.com"><strong>Contact@yourcompany.com</strong></a>#}
+{#                            </li>#}
+                             <li class="menu-item">
+                                Follow us:
+                                <div class="herald-socials">
+                                    <ul class="socials">
+                                        <li>
+                                            <a href="https://www.facebook.com/share/K8WV8HnBim3yLDAG/" class="social-item" target="https://www.facebook.com/share/K8WV8HnBim3yLDAG/">
+                                                <i class="icon fa fa-facebook-square"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.instagram.com/smokeshubpk/" class="social-item" target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.tiktok.com/@smokeshubpakistan?lang=en" class="social-item" target="_blank">
+                                                <i class="fa-brands fa-tiktok"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-footer col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="herald-newsletter style1">
+                        <div class="newsletter-head">
+                            <h3 class="title">Newsletter</h3>
+                        </div>
+                        <div class="newsletter-form-wrap">
+                            <div class="list">
+                                Join up to get the latest on sales, new arrivals and more...
+                            </div>
+                            <input type="email" class="input-text email email-newsletter"
+                                   placeholder="Your email letter">
+                            <button class="button btn-submit submit-newsletter">SUBSCRIBE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 border-custom">
+                    <span></span>
+                </div>
+            </div>
+            <div class="footer-end">
+{#                <div class="row">#}
+{#                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">#}
+{#                        <div class="herald-payment">#}
+{#                            <img src="assets/images/payments.png" alt="img">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">#}
+{#                        <div class="coppyright">#}
+{#                            Copyright © 2020#}
+{#                            <a href="#">Herald</a>#}
+{#                            . All rights reserved#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="footer-device-mobile">
+    <div class="wapper">
+        <div class="footer-device-mobile-item device-home">
+            <a href="index.html">
+					<span class="icon">
+						<i class="fa fa-home" aria-hidden="true"></i>
+					</span>
+                Home
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-wishlist">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-heart" aria-hidden="true"></i>
+					</span>
+                Wishlist
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-cart">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+						<span class="count-icon">
+							0
+						</span>
+					</span>
+                <span class="text">Cart</span>
+            </a>
+        </div>
+        <div class="footer-device-mobile-item device-home device-user">
+            <a href="#">
+					<span class="icon">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</span>
+                Account
+            </a>
+        </div>
+    </div>
+</div>
+<a href="#" class="backtotop">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/jquery.plugin-countdown.min.js' %}"></script>
+    <script src="{% static 'js/jquery-countdown.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/isotope.min.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/mobile-menu.js' %}"></script>
+    <script src="{% static 'js/chosen.min.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/jquery.elevateZoom.min.js' %}"></script>
+    <script src="{% static 'js/jquery.actual.min.js' %}"></script>
+    <script src="{% static 'js/fancybox/source/jquery.fancybox.js' %}"></script>
+    <script src="{% static 'js/lightbox.min.js' %}"></script>
+    <script src="{% static 'js/owl.thumbs.min.js' %}"></script>
+    <script src="{% static 'js/frontend-plugin.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM"></script>
+</body>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'products/js/qtySelectorBtns.js' %}"></script>
+    <script src="{% static 'shopping_cart/js/deleteCartItem.js' %}"></script>
+{% endblock %}

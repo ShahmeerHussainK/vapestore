@@ -1,0 +1,520 @@
+<style> .card{
+
+	background-color: #fff;
+	border:none;
+	border-radius: 10px;
+	width: 190px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.image-container{
+
+	position: relative;
+}
+
+.thumbnail-image{
+	border-radius: 10px !important;
+}
+
+
+.discount{
+
+	background-color: red;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+	font-size: 10px;
+	border-radius: 6px;
+	color: #fff;
+}
+
+.wishlist{
+
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.first{
+
+	position: absolute;
+	width: 100%;
+	    padding: 9px;
+}
+
+
+.dress-name{
+	font-size: 13px;
+	font-weight: bold;
+	width: 75%;
+}
+
+
+.new-price{
+	font-size: 13px;
+	font-weight: bold;
+	color: purple;
+
+}
+.old-price{
+	font-size: 8px;
+	font-weight: bold;
+	color: grey;
+}
+
+
+.btn1{
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	padding: 3px;
+}
+
+.creme{
+	background-color: #fff;
+	border: 2px solid grey;
+
+
+}
+.creme:hover {
+	border: 3px solid grey;
+}
+
+.creme:focus {
+	background-color: grey;
+
+}
+
+
+.red{
+	background-color: #fff;
+	border: 2px solid red;
+
+}
+
+
+.red:hover {
+	border: 3px solid red;
+}
+.red:focus {
+	background-color: red;
+}
+
+
+
+.blue{
+	background-color: #fff;
+	border: 2px solid #40C4FF;
+    max-height: 100px;
+}
+
+.blue:hover {
+	border: 3px solid #40C4FF;
+}
+.blue:focus {
+	background-color: #40C4FF;
+}
+
+
+
+.item-size{
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: #fff;
+	border: 1px solid grey;
+	color: grey;
+	font-size: 10px;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+
+.rating-star{
+	font-size: 10px !important;
+}
+.rating-number{
+	font-size: 10px;
+	color: grey;
+
+}
+.buy{
+	font-size: 12px;
+	color: purple;
+	font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.voutchers{
+	background-color: #fff;
+	border:none;
+	border-radius: 10px;
+	width: 190px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	overflow: hidden;
+
+}
+.voutcher-divider{
+
+	display: flex;
+
+}
+.voutcher-left{
+	width: 60%
+}
+.voutcher-name{
+	color: grey;
+	font-size: 9px;
+	font-weight: 500;
+}
+.voutcher-code{
+	color: red;
+	font-size: 11px;
+	font-weight: bold;
+}
+.voutcher-right{
+	width: 40%;
+	background-color: purple;
+	color: #fff;
+}
+
+.discount-percent{
+	font-size: 12px;
+	font-weight: bold;
+	position: relative;
+	top: 5px;
+}
+.off{
+	font-size: 14px;
+	position: relative;
+	bottom: 5px;
+}</style>
+
+
+<div class="container mt-5">
+
+
+    	<div class="row">
+
+    		<div class="col-md-3">
+
+
+
+    				<div class="card bg-light">
+
+    					<div class="image-container">
+    						<div class="first">
+
+    							<div class="d-flex justify-content-between align-items-center">
+
+    							<span class="discount">-{{ product.discounted_price }}</span>
+    							<span class="wishlist"><i class="fa fa-heart-o"></i></span>
+
+
+    						    </div>
+    						</div>
+                           <a href="{% url 'product_detail' product.id %}"
+aria-label="Opens the product details page">
+
+    						<img src="{{ product.images.first.image.url }}" class="img-fluid rounded thumbnail-image " style="height: 200px;width: 250px">
+
+                            </a>
+    					</div>
+
+
+
+    					<div class="product-detail-container p-2">
+
+    							<div class="d-flex justify-content-between align-items-center">
+
+    								<h5 class="dress-name" style="color:gray">{{ product.name }}</h5>
+
+    								<div class="d-flex flex-column mb-2">
+
+    									<span class="new-price"> RS {{ product.price|floatformat:0 }}</span>
+    									<small class="old-price text-right"></small>
+    								</div>
+
+    							</div>
+
+
+    							<div class="d-flex justify-content-between align-items-center pt-1">
+
+    								<div class="color-select d-flex ">
+
+    									<input type="button" name="grey" class="btn1 creme">
+    									<input type="button" name="red" class="btn1 red ml-2">
+    									<input type="button" name="blue" class="btn1 blue ml-2">
+
+    								</div>
+
+    								<div class="d-flex ">
+
+    									<span class="item-size mr-2 btn1" type="button">S</span>
+    									<span class="item-size mr-2 btn1" type="button">M</span>
+    									<span class="item-size btn1" type="button">L</span>
+
+    								</div>
+
+
+    							</div>
+
+
+    							<div class="d-flex justify-content-between align-items-center pt-1">
+    								<div>
+    									<i class="fa fa-star-o rating-star"></i>
+    									<span class="rating-number">{{ product.current_rating }}</span>
+    								</div>
+
+    								<span class="buy">BUY +</span>
+
+    							</div>
+
+
+
+    					</div>
+                         <div class="row card-footer  no-gutters">
+                                <form action="{% url 'add_to_cart' product.id %}" method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-12 d-flex" style="flex-direction: column;justify-content: center;">
+
+                        <!-- Qty selector buttons -->
+                        <div class="form-group">
+
+                            <div class="input-group input-group-{{ product.id }}">
+
+                                <div class="input-group-prepend">
+
+                                    <button class="btn btn-danger py-1 border border-dark decrease-qty decrease-qty-{{ product.id }}" data-product-id="{{ product.id}}" aria-label="decrease quantity">
+
+                                        <span>
+                                            <i class="fas fa-minus fa-sm"></i>
+                                        </span>
+
+                                    </button>
+                                </div>
+
+                                <input type="number" name="quantity" class="text-center form-control border border-dark qty-input current-qty-pid-{{ product.id }}" value="1" min="1" max="{{ product.stock_level }}" data-product-id="{{ product.id }}" aria-label="quantity">
+
+                                <div class="input-group-append">
+
+                                    <button class="btn btn-success py-1 border border-dark increase-qty increase-qty-{{ product.id }}" data-product-id="{{ product.id}}" aria-label="increase quantity">
+
+                                        <span>
+                                              <i class="fas fa-plus fa-sm"></i>
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-outline-success font-weight-bold px-4" type="submit" {% if not product.in_stock %}disabled{% endif %}>
+                            Add <i class="fa-solid fa-cart-shopping fa-sm"></i>
+                        </button>
+
+                    </div>
+
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+
+                </div>
+
+            </form>
+
+        <div class="col-12">
+
+
+
+
+
+         
+
+        </div>
+
+    </div>
+
+    				</div>
+
+
+    		</div>
+
+
+    	</div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+{#<div class="card my-1 my-md-2 mx-auto p-3 bg-black border-red text-light rounded-0">#}
+
+
+
+
+{##}
+{#    <div class="h-50 card-img-top text-center">#}
+{##}
+{#        <!-- image or placeholder -->#}
+{#       <a href="{% url 'product_detail' product.id %}"
+aria-label="Opens the product details page">#}
+{##}
+{#            {% if product.image %}#}
+{##}
+{#                    <img class="img-fluid h-100"  src="{{ product.images.first.image.url }}" alt="{{ product.name }}">#}
+{##}
+{#            {% else %}#}
+{##}
+{#                    <img class="img-fluid h-100" src="{{ MEDIA_URL }}noimage.png" alt="No image available for {{ product.name }}">#}
+{##}
+{#            {% endif %}#}
+{#        </a>#}
+{#    </div>#}
+{##}
+{#    <div class="card-body h-25 d-flex flex-column justify-content-between py-3">#}
+{##}
+{#        <h2 class="card-title text-center text-warning font-weight-bold text-capitalize sub-heading">{{ product.name }}</h2>#}
+{##}
+{#        <p class="card-text mt-3 text-right" style="color:black">#}
+{##}
+{#            <i class="fa-solid fa-star text-warning font-weight-bold" ></i>#}
+{#            {{ product.current_rating }} / 5#}
+{##}
+{#        </p>#}
+{##}
+{#        <div>#}
+{##}
+{#            <!-- Product price and if relevant sale price to show saving -->#}
+{#            {% if product.has_sale %}#}
+{##}
+{#                <p class="text-center font-weight-bold mb-0 pl-5 ml-5" style="color:black">#}
+{#                    <s class="text-danger">RS{{ product.rrp }}</s>#}
+{#                </p>#}
+{##}
+{#            {% endif %}#}
+{#         <p class="text-center font-weight-bold" style="color:black">RS {{ product.description }}</p>#}
+{##}
+{#            <p class="text-center font-weight-bold" style="color:black">RS {{ product.price }}</p>#}
+{##}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="row card-footer px-0 no-gutters">#}
+{##}
+{#        <div class="col-12">#}
+{##}
+{#            <p class="mx-1">#}
+{##}
+{#                <span class="small text-muted">#}
+{#                    <i class="fas fa-tag mr-1" style="color:black"></i> {{ product.sub_category.friendly_name }}#}
+{#                </span>#}
+{##}
+{##}
+{##}
+{#                <span class="float-right">#}
+{##}
+{#                    <!-- Stock indicator -->#}
+{#                    {% if product.in_stock %}#}
+{##}
+{#                        <i class="fa-regular fa-square-check fa-sm text-success" style="color:black"></i> {{product.stock_level}} in stock#}
+{##}
+{#                    {% else %}#}
+{##}
+{#                        <i class="fa-regular fa-rectangle-xmark fa-sm text-danger" style="color:white"></i> Out of Stock#}
+{##}
+{#                    {% endif %}#}
+{#                </span>#}
+{#            </p>#}
+{##}
+{#            <form action="{% url 'add_to_cart' product.id %}" method="POST">#}
+{##}
+{#                {% csrf_token %}#}
+{##}
+{#                <div class="row">#}
+{##}
+{#                    <div class="col-12 d-flex justify-content-between align-items-start">#}
+{##}
+{#                        <!-- Qty selector buttons -->#}
+{#                        <div class="form-group">#}
+{##}
+{#                            <div class="input-group input-group-{{ product.id }}">#}
+{##}
+{#                                <div class="input-group-prepend">#}
+{##}
+{#                                    <button class="btn btn-danger py-1 border border-dark decrease-qty decrease-qty-{{ product.id }}" data-product-id="{{ product.id}}" aria-label="decrease quantity">#}
+{##}
+{#                                        <span>#}
+{#                                            <i class="fas fa-minus fa-sm"></i>#}
+{#                                        </span>#}
+{##}
+{#                                    </button>#}
+{#                                </div>#}
+{##}
+{#                                <input type="number" name="quantity" class="text-center form-control border border-dark qty-input current-qty-pid-{{ product.id }}" value="1" min="1" max="{{ product.stock_level }}" data-product-id="{{ product.id }}" aria-label="quantity">#}
+{##}
+{#                                <div class="input-group-append">#}
+{##}
+{#                                    <button class="btn btn-success py-1 border border-dark increase-qty increase-qty-{{ product.id }}" data-product-id="{{ product.id}}" aria-label="increase quantity">#}
+{##}
+{#                                        <span>#}
+{#                                              <i class="fas fa-plus fa-sm"></i>#}
+{#                                        </span>#}
+{##}
+{#                                    </button>#}
+{##}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{##}
+{#                        <button class="btn btn-outline-success font-weight-bold px-4" type="submit" {% if not product.in_stock %}disabled{% endif %}>#}
+{#                            Add <i class="fa-solid fa-cart-shopping fa-sm"></i>#}
+{#                        </button>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    <input type="hidden" name="redirect_url" value="{{ request.path }}">#}
+{##}
+{#                </div>#}
+{##}
+{#            </form>#}
+{##}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#</div>#}
